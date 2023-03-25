@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.33424.131
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PeripheralsManager", "PeripheralsManager\PeripheralsManager.csproj", "{1AC3D4BD-5BA2-4658-B0F8-153909BC1EEC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1AC3D4BD-5BA2-4658-B0F8-153909BC1EEC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1AC3D4BD-5BA2-4658-B0F8-153909BC1EEC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1AC3D4BD-5BA2-4658-B0F8-153909BC1EEC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1AC3D4BD-5BA2-4658-B0F8-153909BC1EEC}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {2D8027F5-48AE-453A-AB1D-707332B8EB6E}
+	EndGlobalSection
+EndGlobal
