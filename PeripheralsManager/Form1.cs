@@ -7,12 +7,6 @@ public partial class Form1 : Form
         InitializeComponent();
 
         NotifyIcon.ContextMenuStrip = Menu;
-
-        // setting up the icon in notification tray
-        this.WindowState = FormWindowState.Minimized;
-        this.Hide();
-        this.FormBorderStyle = FormBorderStyle.SizableToolWindow;
-        this.ShowInTaskbar = false;
     }
 
     private void Quit_TSMItem_Click(object sender, EventArgs e)
@@ -57,5 +51,14 @@ public partial class Form1 : Form
         //TODO: logic for switching profiles
     }
 
-
+    private void Form1_Shown(object sender, EventArgs e)
+    {
+        // setting up the icon in notification tray
+        this.Visible = false;
+        //this.WindowState = FormWindowState.Minimized;
+        this.Hide();
+        //this.FormBorderStyle = FormBorderStyle.SizableToolWindow;
+        this.ShowInTaskbar = false;
+        //TODO: if all doesn't work, try this to hide the form "completely"     form.Location = new Point(-10000, -10000);
+    }
 }
