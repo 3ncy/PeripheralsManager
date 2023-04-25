@@ -18,6 +18,7 @@ public partial class Form1 : Form
     {
         PresetForm presetForm = new PresetForm();
         presetForm.Show();
+        presetForm.FormClosed += PresetForm_FormClosed;
         //TODO: handle result from preset Form. PRolly by subscribing to it's closing method and then checking its DialogResult
 
         ToolStripMenuItem profileItem = new()
@@ -42,6 +43,38 @@ public partial class Form1 : Form
 
 
         Profiles_TSMItem.DropDown.Items.Insert(0, profileItem);
+    }
+
+    private void PresetForm_FormClosed(object? sender, FormClosedEventArgs e)
+    {
+        PresetForm presetForm = (sender as PresetForm)!; // we go yolo, I still haven't found a source why sender can be null
+
+        if (presetForm.DialogResult == DialogResult.Cancel)
+            return;
+
+        if (presetForm.DialogResult == DialogResult.Abort) // means "delete"
+        {
+
+        }
+
+        if (presetForm.DialogResult == DialogResult.OK) // process and save stuff
+        {
+            /*
+             * Check if the user was editing or creating a new profile:
+             *  editing:
+             *      Edit the tray icon menu profile name
+             *      
+             *      
+             *  creating:
+             *      Add the profile into the tray icon menu
+             *          Add an "edit" option to the menu
+             *              Register the Click event
+             *      Send data to API
+             *      
+             *      
+             */
+             
+        }
     }
 
     private void Profile_TSMItem_Click(object? sender, EventArgs e)

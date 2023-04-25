@@ -4,7 +4,8 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
-
+using System.Management;
+using NAudio.CoreAudioApi;
 
 namespace PeripheralsManager;
 
@@ -17,7 +18,71 @@ internal class AudioControl
     // tak me napada
     // lepsi asi bude odkazovat na takove to divne id tech zarizeni, ne jejich jmeno. Takove to s dvema parama {0000-0-0-0--000}.{alksdjflaksjflkasjdlfkj}
 
+    #region NAudio 
+    public static float GetVolumeNaudio()
+    {
+        MMDeviceEnumerator enumerator = new MMDeviceEnumerator();
+        MMDevice device = enumerator.GetDefaultAudioEndpoint(DataFlow.Render, Role.Console);
+        return device.AudioEndpointVolume.MasterVolumeLevelScalar;
+    }
 
+    //
+    //  What properties do I need about a device:
+    //      Name - display it to the user
+    //      ID  - identify the device, more devices can share a name
+    //      attribute - volume/sens
+    //      
+    //  What to display
+    //      Name
+    //      change color when disabled/unplugged
+    //
+
+    public record struct AudioDevice
+    {
+        public string Name { get; set; }
+        public Guid Id { get; set; }
+        public float Volume { get; set; }
+        public NAudio.CoreAudioApi.DeviceState State { get; set; }
+    }
+
+    public static List<AudioDevice> GetDevices()
+    {
+        List<AudioDevice> devices = new();
+        MMDeviceEnumerator enumerator = new MMDeviceEnumerator();
+        MMDeviceCollection MMDevices = enumerator.EnumerateAudioEndPoints(DataFlow.Render, DeviceState.Active | DeviceState.Disabled | DeviceState.Unplugged); //get all devices, but "NotPresent"
+
+        foreach (MMDevice device in MMDevices)
+        {
+            string deviceName = "";
+            for (int i = 0; i < device.Properties.Count; i++)
+            {
+                if (device.Properties[i].Key.propertyId != 14) continue;
+                deviceName = device.Properties[i].Value.ToString() ?? "Unnamed device"; //idk, it was shouting at me that it can b null
+            }
+
+            devices.Add(new AudioDevice()
+            {
+                Name = deviceName,
+                Id = Guid.Parse(device.ID.Split("}.")[1]), //TODO: keep an eye on this, maybe all device IDs don't follow the same format? Can't really test it tho
+                Volume = device.AudioEndpointVolume.MasterVolumeLevelScalar,
+                State = device.State
+            });
+
+        }
+
+        return devices;
+    }
+
+    public static void SetVolume(int volume)
+    {
+        volume = Math.Clamp(volume, 0, 100);
+        MMDeviceEnumerator enumerator = new MMDeviceEnumerator(); //TODO: maybe I should store this?
+        MMDevice defaultDevice = enumerator.GetDefaultAudioEndpoint(DataFlow.Render, Role.Console);
+        defaultDevice.AudioEndpointVolume.MasterVolumeLevelScalar = volume / 100f;
+    }
+
+    
+    #endregion
 
 
     #region VolumeUp/Down, method with SendMessage()
@@ -53,7 +118,7 @@ internal class AudioControl
     }
     #endregion
 
-    #region detecting audio devices
+    #region detecting audio capture devices
     //TODO: decide and move to a separate file from this one 
     [DllImport("winmm.dll", SetLastError = true)] static extern uint waveOutGetNumDevs();
     [DllImport("winmm.dll", SetLastError = true, CharSet = CharSet.Auto)] public static extern uint waveOutGetDevCaps(uint hwo, ref WAVEOUTCAPS pwoc, uint cbwoc);
@@ -114,5 +179,24 @@ internal class AudioControl
     }
     #endregion
 
+    #region another try on detecting devices and getting IDs
+
+    public List<string> GetMouseId()
+    {
+        List<string> res = new();
+        var mbs = new ManagementObjectSearcher("SELECT * FROM Win32_SoundDevice");
+        ManagementObjectCollection mbsList = mbs.Get();
+        foreach (ManagementObject mo in mbsList)
+        {
+
+
+
+
+        }
+
+        return res;
+    }
+
+    #endregion
 
 }
