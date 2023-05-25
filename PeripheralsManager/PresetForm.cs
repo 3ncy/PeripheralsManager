@@ -13,6 +13,7 @@ namespace PeripheralsManager;
 
 public partial class PresetForm : Form
 {
+    public string PrevProfileName { get; set; } = ""; //TODO: set this somehow
     public string ProfileName { get; private set; } = "";
     public int MouseSpeed { get; private set; } = 10;
     //TODO: check this for mouse speed: https://liquipedia.net/counterstrike/Mouse_Settings#Windows_Sensitivity
@@ -125,11 +126,6 @@ public partial class PresetForm : Form
 
     private void button2_Click(object sender, EventArgs e)
     {
-
-    }
-
-    private void button3_Click(object sender, EventArgs e)
-    {
-
+        Api.CheckHealth();
     }
 }

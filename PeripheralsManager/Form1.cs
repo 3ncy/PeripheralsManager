@@ -45,9 +45,9 @@ public partial class Form1 : Form
         Profiles_TSMItem.DropDown.Items.Insert(0, profileItem);
     }
 
-    private void PresetForm_FormClosed(object? sender, FormClosedEventArgs e)
+    private void PresetForm_FormClosed(object? sender, FormClosedEventArgs e) // happens after the user is done editting / adding a profile
     {
-        PresetForm presetForm = (sender as PresetForm)!; // we go yolo, I still haven't found a source why sender can be null
+        PresetForm presetForm = (sender as PresetForm)!; // we go yolo, I still haven't found a reason why sender can be null
 
         if (presetForm.DialogResult == DialogResult.Cancel)
             return;

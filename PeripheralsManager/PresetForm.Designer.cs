@@ -30,12 +30,11 @@
         {
             Audio_Group = new GroupBox();
             button1 = new Button();
-            button2 = new Button();
-            button3 = new Button();
             Volume_UpDown = new NumericUpDown();
             label4 = new Label();
             AudioDevices_ListBox = new ListBox();
             Volume_TrackBar = new TrackBar();
+            button2 = new Button();
             Mouse_Group = new GroupBox();
             label3 = new Label();
             label2 = new Label();
@@ -48,6 +47,7 @@
             Cancel_Btn = new Button();
             Delete_Btn = new Button();
             Name_TB = new TextBox();
+            label5 = new Label();
             Audio_Group.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)Volume_UpDown).BeginInit();
             ((System.ComponentModel.ISupportInitialize)Volume_TrackBar).BeginInit();
@@ -58,8 +58,6 @@
             // Audio_Group
             // 
             Audio_Group.Controls.Add(button1);
-            Audio_Group.Controls.Add(button2);
-            Audio_Group.Controls.Add(button3);
             Audio_Group.Controls.Add(Volume_UpDown);
             Audio_Group.Controls.Add(label4);
             Audio_Group.Controls.Add(AudioDevices_ListBox);
@@ -78,22 +76,6 @@
             button1.TabIndex = 2;
             button1.Text = "set vol";
             button1.Click += button1_Click;
-            // 
-            // button2
-            // 
-            button2.Location = new Point(207, 231);
-            button2.Name = "button2";
-            button2.Size = new Size(75, 23);
-            button2.TabIndex = 1;
-            button2.Click += button2_Click;
-            // 
-            // button3
-            // 
-            button3.Location = new Point(279, 231);
-            button3.Name = "button3";
-            button3.Size = new Size(75, 23);
-            button3.TabIndex = 0;
-            button3.Click += button3_Click;
             // 
             // Volume_UpDown
             // 
@@ -130,6 +112,15 @@
             Volume_TrackBar.Size = new Size(181, 45);
             Volume_TrackBar.TabIndex = 17;
             Volume_TrackBar.Scroll += Volume_TrackBar_Scroll;
+            // 
+            // button2
+            // 
+            button2.Location = new Point(340, 449);
+            button2.Name = "button2";
+            button2.Size = new Size(113, 23);
+            button2.TabIndex = 1;
+            button2.Text = "check api status";
+            button2.Click += button2_Click;
             // 
             // Mouse_Group
             // 
@@ -170,6 +161,7 @@
             MouseDevices_ListBox.Name = "MouseDevices_ListBox";
             MouseDevices_ListBox.Size = new Size(260, 184);
             MouseDevices_ListBox.TabIndex = 0;
+            MouseDevices_ListBox.Visible = false;
             // 
             // label1
             // 
@@ -219,7 +211,7 @@
             // 
             // Save_Btn
             // 
-            Save_Btn.Location = new Point(545, 33);
+            Save_Btn.Location = new Point(556, 34);
             Save_Btn.Name = "Save_Btn";
             Save_Btn.Size = new Size(75, 23);
             Save_Btn.TabIndex = 12;
@@ -255,11 +247,22 @@
             Name_TB.TabIndex = 9;
             Name_TB.TextChanged += Name_TB_TextChanged;
             // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.Location = new Point(32, 15);
+            label5.Name = "label5";
+            label5.Size = new Size(77, 15);
+            label5.TabIndex = 17;
+            label5.Text = "Profile name:";
+            // 
             // PresetForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(759, 484);
+            Controls.Add(label5);
+            Controls.Add(button2);
             Controls.Add(Audio_Group);
             Controls.Add(Mouse_Group);
             Controls.Add(Audio_CB);
@@ -302,6 +305,6 @@
         private Label label4;
         private Button button1;
         private Button button2;
-        private Button button3;
+        private Label label5;
     }
 }
