@@ -14,6 +14,15 @@ Download the `.exe` and run it! That's is.
 
 Also it is required to have dotnet runtime installed on your system. But all modern windows installations have it already. If you don't, the error message will direct you on how to get it.
 
+### no exe? build it yourself!
+If there isn't any executable that would satisfy your version needs, just download the code and build the app yoruself.
+
+For that you will need installed the __.net 7__ SDK.
+
+Once you have that, navigate in your terminal to the project folder and run `MSBuild.exe PeripheralsManager.sln`
+
+Atlernatively you can open this project in Visual Studio (or whatever editor you like the most and that supports WinForms applications) and build the project from there.
+
 ## usage:
 Log in with your account (or create a new one, if you don't have it) {btw, if I get fed up with this, I might implement the database locally, so no more logging and required internet connection. For more news, star this project so you don't miss new releases.}
 
